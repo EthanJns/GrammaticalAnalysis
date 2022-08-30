@@ -1,0 +1,5 @@
+from enum import Enum
+
+class ConfigEnum:
+    CHROME_LOCATION = 'CHROME_LOCATION'
+    CHROME_DRIVER_LOCATION = 'CHROME_DRIVER_LOCATION'
