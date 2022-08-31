@@ -1,4 +1,5 @@
 from GrammarDriver import GrammarWebDriver as GWDriver
+from selenium.webdriver.common.by import By
 from resources.ConfigEnum import ConfigEnum as CE
 
 def build_config():
@@ -12,3 +13,6 @@ def build_config():
 
 gd = GWDriver(build_config())
 gd.get_driver().get("https://google.com")
+element = gd.get_driver().find_element(By.CLASS_NAME, "gNO89b")
+print(element.get_attribute("value"))
+

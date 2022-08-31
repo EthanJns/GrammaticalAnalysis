@@ -10,7 +10,7 @@ class GrammarWebDriver:
         
         options = Options()
         options.binary_location = config_dict[CE.CHROME_LOCATION].strip()
-        # options.headless = True
+        options.headless = True
         service_location = config_dict[CE.CHROME_DRIVER_LOCATION].strip()
 
         self.driver = webdriver.Chrome(options=options, service=Service(service_location))
