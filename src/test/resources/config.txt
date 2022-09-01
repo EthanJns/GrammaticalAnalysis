@@ -1,0 +1,6 @@
+# Comments will start with '#' symbol
+# This file will store everything in key: value pairs
+
+CHROME_LOCATION=/usr/bin/google-chrome
+CHROME_DRIVER_LOCATION=/usr/bin/chromedriver
+RESOURCES_FOLDER=/home/ethan/documents/projects/GrammaticalAnalysis/src/main/resources
