@@ -11,8 +11,9 @@ def build_config():
             config_dict[key_value[0]] = key_value[1]
     return config_dict
 
-gd = GWDriver(build_config())
-gd.get_driver().get("https://google.com")
-element = gd.get_driver().find_element(By.CLASS_NAME, "gNO89b")
-print(element.get_attribute("value"))
+gd = GWDriver()
+word_list_file = open("./resources/wordlist.txt","r",encoding='UTF-8')
+word_list = word_list_file.readlines()
+print(word_list[0])
+
 
