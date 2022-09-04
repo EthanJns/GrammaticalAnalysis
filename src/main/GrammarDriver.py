@@ -10,6 +10,8 @@ class GrammarWebDriver:
     def get_parts_of_speech(self, words):
         word_to_pos={}
         for word in words:
+            print(word)
+            word = word[:-1] if word[len(word)-1] == '\n' else word
             resp = requests.get(self.web_address + word) #Figured this out by going through different words and seeing how the web address would change
             response_text = resp.text
             parts_of_speech = []
