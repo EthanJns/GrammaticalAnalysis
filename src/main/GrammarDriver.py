@@ -1,28 +1,32 @@
-
+import re
 import requests
 from resources.ConfigEnum import ConfigEnum as CE
 
 class GrammarWebDriver:
     
     web_address = 'https://www.merriam-webster.com/dictionary/'
-    class_name = 'important-blue-link' #Retrieved this by going through websites source code    
 
-# TODO: Need to change all the splitting and string manipulation to use a regular expression
+    # Regular expressions for parsing source code
+    pos_regex = r'\"important-blue-link\"[\s]*href=[\"\/<>a-zA-Z]*</a>'
+    contradiction_regex = r'[^a-zA-Z\d\s]+'
+    mult_same_pos_regex = r'[\(\d\)]'
+    
     def get_parts_of_speech(self, words):
         word_to_pos={}
         for word in words:
-            # print(word)
-            word = word[:-1] if word[len(word)-1] == '\n' else word
+            word = word[:-1].lower() if word[len(word)-1] == '\n' else word.lower()
             resp = requests.get(self.web_address + word) #Figured this out by going through different words and seeing how the web address would change
-            # print(f"GET request made with word: {word}")
             response_text = resp.text
             parts_of_speech = []
-            all_instances = response_text.split(self.class_name)
-            for i in range(len(all_instances)-1):
-                a_tag = all_instances[i+1].split("</a>")
-                i = i+1
-                pos_split = a_tag[0]
-                parts_of_speech.append(a_tag[0].split("</span")[0][1:].split(">")[1])
+            pos_tags = re.findall(self.pos_regex, response_text)
+            for pos_tag in pos_tags:
+                pos = pos_tag.split('>')[1].split('<')[0]
+                if re.search(self.mult_same_pos_regex, pos):
+                    parts_of_speech.append(pos.split(" ")[0])    
+                else:
+                    parts_of_speech.append(pos)
+            if re.search(self.contradiction_regex, word):
+                parts_of_speech.append("contraction")
             word_to_pos[word] = list(set(parts_of_speech))
             # print(f"Added list to dict for word: {word}")
         

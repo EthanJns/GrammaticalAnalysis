@@ -2,7 +2,6 @@ from GrammarDriver import GrammarWebDriver as GWDriver
 from selenium.webdriver.common.by import By
 from resources.ConfigEnum import ConfigEnum as CE
 
-
 class WordAnalyzer:
 
     def __init__(self):
@@ -17,12 +16,12 @@ class WordAnalyzer:
         batch_size = 100
         batch_number = 1
         for i in range(0, len(word_list), batch_size):
-            pos_file = open("./resources/pos.txt","a+")
+            pos_file = open("./resources/pos.txt","a+") if pos_file.closed else pos_file
             print(f"working on batch #{batch_number}")
             # In case of working with splices not divisible by 50, make sure no index out of bounds error is thrown
             splice_end = batch_size if (len(word_list) - i) > batch_size else len(word_list) - i
-            words = word_list_splice[i:(i+splice_end)]
-            word_to_pos = gd.get_parts_of_speech(words)
+            words = word_list[i:(i+splice_end)]
+            word_to_pos = self.gd.get_parts_of_speech(words)
 
             # Iterate through the retrieved dictionary and store it in the file
             for word in word_to_pos:
