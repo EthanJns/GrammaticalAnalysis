@@ -2,9 +2,8 @@ from WordAnalyzer import WordAnalyzer as WA
 
 class SentenceAnalyzer:
     
-    def __init__(self):
-        print("Instanciating Word Analyzer")
-        self.wa = WA()
+    def __init__(self, wa):
+        self.wa = wa
 
     def analyze_sentence(self, sentence):
         return 0

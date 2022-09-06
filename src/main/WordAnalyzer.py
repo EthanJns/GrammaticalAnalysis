@@ -5,7 +5,6 @@ from resources.ConfigEnum import ConfigEnum as CE
 class WordAnalyzer:
 
     def __init__(self):
-        print("Instanciating Driver")
         self.gd = GWDriver()
 
 
