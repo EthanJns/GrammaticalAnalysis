@@ -7,6 +7,7 @@ class GrammarWebDriver:
     web_address = 'https://www.merriam-webster.com/dictionary/'
     class_name = 'important-blue-link' #Retrieved this by going through websites source code    
 
+# TODO: Need to change all the splitting and string manipulation to use a regular expression
     def get_parts_of_speech(self, words):
         word_to_pos={}
         for word in words:
