@@ -1,7 +1,7 @@
 be:verb
-careful:adjective
-driving:adjective
-dont:noun
+careful:adjective,adverb
+driving:adjective,verb
+dont:noun,contraction
 worry:verb
 what:adjective
 do:verb
@@ -13,12 +13,12 @@ day:noun
 isnt:noun
 it:noun
 would:verb
-like:adjective
+like:adjective, verb
 some:adjective
 coffee:noun
-call:noun
+call:noun, verb
 me:pronoun
-back:adjective
+back:adjective, preposition
 i:pronoun
 not:noun
 understand:verb
