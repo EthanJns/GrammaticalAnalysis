@@ -1,2 +1,4 @@
 selenium
 webdriver-manager
+numpy
+tensorflow<2.9
