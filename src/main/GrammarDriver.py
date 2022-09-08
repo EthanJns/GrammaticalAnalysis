@@ -14,10 +14,6 @@ class GrammarWebDriver:
     def get_parts_of_speech(self, words, word_to_pos, t):
         if len(words) == 0:
             return
-        print("thread number {0}".format(t))
-        print("Getting Parts of Speech")
-        print("First word in words {0}".format(words[0]))
-        # word_to_pos={}
         for word in words:
             word = word[:-1].lower() if word[len(word)-1] == '\n' else word.lower()
             resp = requests.get(self.web_address + word) #Figured this out by going through different words and seeing how the web address would change
@@ -33,7 +29,4 @@ class GrammarWebDriver:
             if re.search(self.contradiction_regex, word):
                 parts_of_speech.append("contraction")
             word_to_pos[word] = list(set(parts_of_speech))
-            # print(f"Added list to dict for word: {word}")
-        
-        # return word_to_pos
 
