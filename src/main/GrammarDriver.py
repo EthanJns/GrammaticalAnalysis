@@ -23,7 +23,8 @@ class GrammarWebDriver:
         pos_tags = re.findall(self.pos_regex, response_text)
         return pos_tags, other_form
 
-    def get_parts_of_speech(self, words, word_to_pos, t):
+    def get_parts_of_speech(self, words, word_to_pos):
+        print(words)
         if len(words) == 0:
             return
         for word in words:
@@ -42,8 +43,6 @@ class GrammarWebDriver:
                 else:
                     if pos in self.useable_pos:
                         parts_of_speech.append(pos)
-                    else:
-                        print(pos +" is not in the set")
 
             if re.search(self.contradiction_regex, word):
                 parts_of_speech.append("contraction")

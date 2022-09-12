@@ -32,7 +32,7 @@ class WordAnalyzer:
                 end_of_batch = i + ((1+t) * batch_size)
                 splice_end = end_of_batch if (len(word_list) - end_of_batch) > batch_size else len(word_list) - i
                 words = word_list[batch_begin : end_of_batch]
-                threads.append(threading.Thread(target=self.gd.get_parts_of_speech, args=(words, word_to_pos, t)))
+                threads.append(threading.Thread(target=self.gd.get_parts_of_speech, args=(words, word_to_pos)))
                 threads[t].start()
             for t in threads:
                 t.join()
@@ -50,8 +50,9 @@ class WordAnalyzer:
         # pos_file.close()
         
 
-    def analyze_single_word(self, word):
-        return self.gd.get_parts_of_speech(list(word))
+    def analyze_single_word(self, word, pos_dict):
+        self.gd.get_parts_of_speech([word],pos_dict)
+        
 
     def analyze_words(self, words):
         return self.gd.get_parts_of_speech(words)

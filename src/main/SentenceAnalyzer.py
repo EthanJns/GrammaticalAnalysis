@@ -28,7 +28,7 @@ class SentenceAnalyzer:
             index_number = input()
             return pos_list[int(index_number)]
 
-    def analyze_text(self, sentences_file):
+    def analyze_text(self, sentences_file,pos_file):
         sentences_pos = open('./resources/sentences_list','w+')
         sentences = sentences_file.readlines()
         for sentence in sentences:
@@ -36,8 +36,22 @@ class SentenceAnalyzer:
             new_sentence = sentence + ':'
             words = sentence.strip().split(" ")
             for word in words:
-                pos_list = self.pos_dict[word.lower().strip()]
-                new_sentence = new_sentence + (pos_list[0] + " " if  len(pos_list) == 1 else self.decide_pos_manual(pos_list, word, sentence) + " ")
+                word = word.lower().strip()
+                if word in self.pos_dict:
+                    pos_list = self.pos_dict[word]
+                    new_sentence = new_sentence + (pos_list[0] + " " if  len(pos_list) == 1 else self.decide_pos_manual(pos_list, word, sentence) + " ")
+                else:
+                    self.wa.analyze_single_word(word, self.pos_dict)
+                    pos_list = self.pos_dict[word]
+                    word_pos = word + ":"
+                    for pos in pos_list:
+                        word_pos += pos +","
+                    word_pos = word_pos[:-1] + "\n"
+                    pos_file.write(word_pos)
+
+                    new_sentence = new_sentence + (pos_list[0] + " " if  len(pos_list) == 1 else self.decide_pos_manual(pos_list, word, sentence) + " ")
+
+
             print("New sentence is: {0}".format(new_sentence))
             sentences_pos.write(new_sentence+"\n")
         sentences_pos.close()
