@@ -5,6 +5,9 @@ from resources.ConfigEnum import ConfigEnum as CE
 
 class WordAnalyzer:
 
+# TODO:
+    # For words that are in different forms, we need to grab the word inside this other class "cxt text-uppercase"
+    # and then add or look that word up
     def __init__(self):
         self.gd = GWDriver()
         self.thread_locked = False
@@ -17,7 +20,6 @@ class WordAnalyzer:
         batch_size = 100
         batch_number = 1
         thread_number = 10
-        start = time.time()
         for i in range(0, len(word_list), batch_size*thread_number):
             pos_file = open("./resources/pos.txt","a+") if pos_file.closed else pos_file
             print(f"working on batches #{batch_number}-{batch_number+thread_number-1}")
@@ -45,7 +47,7 @@ class WordAnalyzer:
                 pos_file.write(word_pos)
 
             batch_number = batch_number + thread_number
-        pos_file.close()
+        # pos_file.close()
         
 
     def analyze_single_word(self, word):

@@ -32,7 +32,7 @@ X = padded_sentences
 Y = sentiment
 
 #I believe the loss is what we need to look into, since we will need values that are based on non binary outputs (1-8)
-model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+model.compile(optimizer='sgd', loss='categorical_crossentropy', metrics=['accuracy'])
 model.summary()
 
 model.fit(X, Y, epochs=50, verbose=0)

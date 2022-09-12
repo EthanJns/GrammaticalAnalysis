@@ -4,6 +4,7 @@ import re
 class SentenceAnalyzer:
     
     def __init__(self, wa, pos_file):
+        print(pos_file.closed)
         self.wa = wa
         self.pos_dict = {}
         pos_text = pos_file.readlines()
@@ -12,6 +13,7 @@ class SentenceAnalyzer:
             word = pos_split[0]
             pos = pos_split[1].strip().split(",")
             self.pos_dict[word] = pos
+        print(self.pos_dict)
 
     def analyze_sentence(self, sentence):
         return 0
