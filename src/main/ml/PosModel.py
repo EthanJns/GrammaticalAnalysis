@@ -4,9 +4,11 @@ from tensorflow.keras import models
 class PosModel:
     def __init__(self, model_location):
         # If the model does not exist, create an empty model
+        self.is_loaded = False
         if model_location is not None:
             try:
                 self.model = models.load_model(model_location)
+                self.is_loaded = True
             except:
                 print("Model at location [{0}] does not exist. Creating blank model".format(model_location))
                 self.model = Sequential()

@@ -36,12 +36,12 @@ class PosTrainer:
         print("Tokenized_Output: ")
         print(tokenized_output)
 
-        self.model.add_layer(Embedding(vocab_size, max_size*2, input_length=max_size, name='embedding'))
-        self.model.add_layer(Flatten())
-        self.model.add_layer(Dense(max_size, activation='sigmoid'))
-
-        self.model.get_model().compile(optimizer=self.optimizer, loss=self.loss_function, metrics=['accuracy'])
-        self.model.get_model().summary()
+        if self.model.is_loaded:
+            self.model.add_layer(Embedding(vocab_size, max_size*2, input_length=max_size, name='embedding'))
+            self.model.add_layer(Flatten())
+            self.model.add_layer(Dense(max_size, activation='sigmoid'))
+            self.model.get_model().compile(optimizer=self.optimizer, loss=self.loss_function, metrics=['accuracy'])
+            self.model.get_model().summary()
 
         self.model.get_model().fit(tokenized_input, tokenized_output, epochs=50, verbose=0)
         print(self.model.get_model().get_layer('embedding').get_weights()[0])

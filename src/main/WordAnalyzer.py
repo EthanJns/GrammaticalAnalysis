@@ -19,14 +19,14 @@ class WordAnalyzer:
         # Getting the parts of speech for words in batches in case of failure, can splice word list from last word
         batch_size = 100
         batch_number = 1
-        thread_number = 10
+        thread_number = 5
         for i in range(0, len(word_list), batch_size*thread_number):
             pos_file = open("./resources/pos.txt","a+") if pos_file.closed else pos_file
             print(f"working on batches #{batch_number}-{batch_number+thread_number-1}")
             # In case of working with splices not divisible by 50, make sure no index out of bounds error is thrown
             threads = []
             word_to_pos = {}
-
+            finished_threads = 0
             for t in range(thread_number):
                 batch_begin = i + (t*batch_size)
                 end_of_batch = i + ((1+t) * batch_size)
@@ -45,7 +45,8 @@ class WordAnalyzer:
                 if len(word_to_pos[word]) == 0:
                     continue
                 pos_file.write(word_pos)
-
+            
+            pos_file.close()
             batch_number = batch_number + thread_number
         # pos_file.close()
         
